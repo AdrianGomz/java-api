@@ -1,6 +1,7 @@
 package com.example.demo.services;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,5 +20,22 @@ public class UserService {
 
     public UserModel saveUser(UserModel user) {
         return userRepository.save(user);
+    }
+
+    public Optional<UserModel> getUserById(long id) {
+        return userRepository.findById(id);
+    }
+
+    public ArrayList<UserModel> getByPriority(Integer priority) {
+        return userRepository.findByPriority(priority);
+    }
+
+    public Boolean deleteUser(long id) {
+        try {
+            userRepository.deleteById(id);
+            return true;
+        } catch (Exception err) {
+            return false;
+        }
     }
 }
